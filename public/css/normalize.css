@@ -394,3 +394,18 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
+.container {
+  text-align: center;
+}
+
+form {
+  margin: 0 auto;
+}
+
+.errors {
+  display: none;
+  color: red;
+}
+
+

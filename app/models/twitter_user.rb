@@ -1,6 +1,8 @@
 class TwitterUser < ActiveRecord::Base
   has_many :tweets
 
+  before_save { self.username.gsub!(/@/, "") }
+
   def fetch_tweets!
     refresh_tweets if tweets_stale?(self.tweet_frequency)
     self.tweets

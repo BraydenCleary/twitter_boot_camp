@@ -1,6 +1,1 @@
-<div class="container">
-  <h1>Welcome to TwitterBootCamp</h1>
-  <% @tweets.each do |tweet| %>
-    <p><%= tweet.content %></p>
-  <% end %>
-</div>
+<%= erb :_tweets, :locals => {:tweets => @tweets} %>

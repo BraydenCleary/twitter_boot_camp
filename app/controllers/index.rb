@@ -1,10 +1,11 @@
 get '/' do
-  # input username
+  erb :root
 end
 
-get '/:username' do
+post '/:username' do
   @user = TwitterUser.find_or_create_by_username(params[:username])
   @user.fetch_tweets!
   @tweets = @user.tweets.limit(10)
-  erb :index
+  sleep(3)
+  erb :index, :layout => false
 end
