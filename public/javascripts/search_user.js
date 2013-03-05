@@ -5,22 +5,20 @@ $(document).ready(function(){
   
   $('form.username').on('submit',function(e){
     e.preventDefault();
-    $('.keyword-errors').hide();
-    $('.username-errors').hide();
+    $('.errors').html('')
     var username = $(this).find("input[name=username]").val();
 
     if (usernameRegex.test(username)) {
       $('div.tweets').html("");
 
-      $('#loading').attr('src', images[Math.round(Math.random()*3)]).show();
-      
+      $('#loading').attr('src', images[Math.round(Math.random()*3)]).show();  
       
       $.post("/users/" + username.substring(1), function(data){
         $('div.tweets').html(data);
         $('#loading').hide();
       });
     } else {
-      $('.username-errors').show();
+      $('.errors').html('Invalid Twitter Handle');
       $('div.tweets').html("");
     }
   });
