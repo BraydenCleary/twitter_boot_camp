@@ -403,9 +403,12 @@ form {
   margin: 0 auto;
 }
 
-.errors {
+.username-errors {
   display: none;
   color: red;
 }
 
-
+.keyword-errors {
+  display: none;
+  color: red;
+}
