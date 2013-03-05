@@ -1,8 +1,17 @@
-var usernameRegex = /@.*/
-var images = ['/images/sonic-gif.gif', '/images/cat.gif', '/images/spongebob.gif', '/images/waiting.gif']
+var usernameRegex = /@.*/;
+
+function LoadingImage (){
+  this.files = ['/images/sonic-gif.gif', '/images/cat.gif', '/images/spongebob.gif', '/images/waiting.gif'];
+}
+
+LoadingImage.prototype.selectRandom = function(){
+  return this.files[Math.round(Math.random()*3)];
+}
+
+var image = new LoadingImage();
 
 $(document).ready(function(){
-  
+
   $('form.username').on('submit',function(e){
     e.preventDefault();
     $('.errors').html('')
@@ -11,7 +20,7 @@ $(document).ready(function(){
     if (usernameRegex.test(username)) {
       $('div.tweets').html("");
 
-      $('#loading').attr('src', images[Math.round(Math.random()*3)]).show();  
+      $('#loading').show().attr('src', image.selectRandom());  
       
       $.post("/users/" + username.substring(1), function(data){
         $('div.tweets').html(data);
@@ -21,5 +30,8 @@ $(document).ready(function(){
       $('.errors').html('Invalid Twitter Handle');
       $('div.tweets').html("");
     }
+    $('.username').find('input[name=username]').val(''); 
+    $('.username').find('input').attr('placeholder', username)
+
   });
 });

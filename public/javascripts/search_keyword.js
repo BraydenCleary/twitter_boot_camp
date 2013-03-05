@@ -15,8 +15,6 @@ function Search (term){
     $(selector).append(this.error)
   }
 
-var images = ['/images/sonic-gif.gif', '/images/cat.gif', '/images/spongebob.gif', '/images/waiting.gif']
-
 $(document).ready(function(){
 
   $('form.search-term').on('submit', function(e){
@@ -28,16 +26,21 @@ $(document).ready(function(){
     var search = new Search(term);
 
     if (search.valid()){
-      $('#loading').attr('src', images[Math.round(Math.random()*3)]).show();
+      $('#loading').show().attr('src', image.selectRandom());
+      
       $.post('/keywords/' + search.term, function(data){
         $('div.tweets').html(data);
         $('#loading').hide();
       });  
+
     } else {
+      
       $('.errors').html(search.error)
+
     }   
 
-    $('.search-term').find('input[name=keyword]').val(''); 
+    $('.search-term').find('input[name=keyword]').val('');
+    $('.search-term').find('input').attr('placeholder', search.term)
 
   });
 });
